@@ -1,0 +1,61 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: uzairkamal@yahoo.com
+  description: Api for creche
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://www.uzairkamal.wordpress.co
+  title: Creche
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: Everything about your Baby
+  name: Baby
+paths:
+  /baby/{id}:
+    get:
+      description: Get Baby details for respective identifier.
+      operationId: getBaby
+      parameters:
+      - description: Help in tracing request
+        in: header
+        name: requestId
+        schema:
+          type: string
+      - description: Baby identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          $ref: '#/definitions/BabyDetails'
+        "400":
+          $ref: '#/definitions/Error'
+      summary: create request for baby
+      tags:
+      - baby
+      x-accepts: application/json
+components:
+  schemas:
+    BabyDetails:
+      properties:
+        name:
+          description: name of baby
+          type: string
+        age:
+          description: age of baby
+          type: string
+      type: object
+    Error:
+      properties:
+        code:
+          description: Error code
+          type: string
+      type: object
+x-original-swagger-version: "2.0"
+
